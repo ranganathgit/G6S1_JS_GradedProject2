@@ -228,22 +228,22 @@ function filterResumes() {
   console.log(`The term searched for was ${input.value}`);
   filterJob = input.value;
   try {
-    if (filterJob != null) {
+    if (filterJob) {
       filteredResults.fill(null);
       // console.log("filterJob inside renderResume");
       // console.log("filteredResults before loop....", filteredResults);
       // console.log("original resumes before loop....", results.resume);
       for (index = 0; index < results.resume.length; index++) {
-        for (m = 0; m < results.resume[index].skills.keywords.length; m++) {
-          console.log(results.resume[index].skills.keywords[m]);
-          if (
-            results.resume[index].skills.keywords[m].toLowerCase() ==
-            filterJob.toLowerCase()
-          ) {
-            console.log("Assigning to array");
-            filteredResults[counter++] = results.resume[index];
-          }
+        //for (m = 0; m < results.resume[index].skills.keywords.length; m++) {
+        //console.log(results.resume[index].skills.keywords[m]);
+        if (
+          results.resume[index].basics.AppliedFor.toLowerCase() ==
+          filterJob.toLowerCase()
+        ) {
+          console.log("Assigning to array");
+          filteredResults[counter++] = results.resume[index];
         }
+        //}
       }
 
       filteredResults = filteredResults.filter((val) => val != null);
@@ -258,12 +258,16 @@ function filterResumes() {
     <input style='width: 54%; margin-left: 120px; margin-bottom: 30px' id="search" type="search" placeholder="search for keywords to filter the resources" onsearch="filterResumes()"> <br><br>
         <div class="no-resumes">
         <span style='font-size:100px;'>&#128542;</span>
-        <h1>No resumes found</h1>
+        <h1>No such results found</h1>
         </div>
         `;
         document.querySelector(".resumes").innerHTML = output;
       }
     }
+    // else {
+    //   currentIndex = 0;
+    //   renderResume();
+    // }
   } catch (Error) {
     console.log(Error);
   }
